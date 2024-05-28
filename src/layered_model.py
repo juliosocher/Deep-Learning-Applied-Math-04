@@ -17,7 +17,7 @@ def define_dense_model_single_layer(input_length, activation_f='sigmoid', output
 
 def define_dense_model_with_hidden_layer(input_length, 
                                          activation_func_array=['relu','sigmoid'],
-                                         hidden_layer_size=10,
+                                         hidden_layer_size=20,
                                          output_length=1):
     """Define a dense model with a hidden layer with the following parameters:
     input_length: the number of inputs
@@ -29,7 +29,6 @@ def define_dense_model_with_hidden_layer(input_length,
         layers.Dense(units=hidden_layer_size, activation=activation_func_array[0]),
         layers.Dense(units=output_length, activation=activation_func_array[1])
     ])
-
     return model
 
 
