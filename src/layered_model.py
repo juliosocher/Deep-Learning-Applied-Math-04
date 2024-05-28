@@ -1,17 +1,20 @@
+import tensorflow as tf
+
 from tensorflow.keras.datasets import mnist
 from tensorflow import keras
 from tensorflow.keras import layers, optimizers
-import tensorflow as tf
 
-
-def define_dense_model_single_layer(input_length, activation_f='sigmoid', output_length=1):
+def define_dense_model_single_layer(input_length,
+                                    activation_f='sigmoid',
+                                    output_length=1):
     """Define a dense model with a single layer with the following parameters:
     input_length: the number of inputs
     activation_f: the activation function
     output_length: the number of outputs (number of neurons)"""
     model = keras.models.Sequential([
         layers.Input(shape=[input_length]),
-        layers.Dense(units=output_length, activation=activation_f)
+        layers.Dense(units=output_length,
+                     activation=activation_f)
     ])
     return model
 
@@ -31,7 +34,6 @@ def define_dense_model_with_hidden_layer(input_length,
     ])
     return model
 
-
 def get_mnist_data():
     """Get the MNIST data."""
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -44,16 +46,20 @@ def binarize_labels(labels, target_digit=2):
     labels = 1*(labels==target_digit)
     return labels
 
-def fit_mnist_model_single_digit(x_train, y_train, target_digit, model, epochs=10, batch_size=128):
+def fit_mnist_model_single_digit(x_train, y_train, target_digit, model, epochs=20, batch_size=64):
     """Fit the model to the data.
     compile the model and add parameters for  the "optimizer", the loss function , 
     and the metrics, Hint: use binary crossentropy for the loss function .
     then fit the model on the training data. (pass the epochs and batch_size params)
     """
     y_train = binarize_labels(y_train, target_digit)
-    model.compile(loss="binary_crossentropy", optimizer=optimizers.Adam(), metrics=["accuracy"])
-    model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size)
-
+    model.compile(loss="binary_crossentropy",
+                  optimizer=optimizers.Nadam(),
+                  metrics=["accuracy"])
+    model.fit(x_train,
+              y_train,
+              epochs=epochs,
+              batch_size=batch_size)
     return model
 
 def evaluate_mnist_model_single_digit(x_test, y_test, target_digit, model):
