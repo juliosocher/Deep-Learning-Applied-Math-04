@@ -69,3 +69,5 @@ def evaluate_mnist_model_single_digit(x_test, y_test, target_digit, model):
     y_test = binarize_labels(y_test, target_digit)
     loss, accuracy = model.evaluate(x_test, y_test)
     return loss, accuracy
+
+## changing to test the workflow in github actions
