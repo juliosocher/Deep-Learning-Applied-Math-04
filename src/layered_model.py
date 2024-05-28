@@ -49,7 +49,6 @@ def fit_mnist_model_single_digit(x_train, y_train, target_digit, model, epochs=1
     """Fit the model to the data.
     compile the model and add parameters for  the "optimizer", the loss function , 
     and the metrics, Hint: use binary crossentropy for the loss function .
-
     then fit the model on the training data. (pass the epochs and batch_size params)
     """
     y_train = binarize_labels(y_train, target_digit)
